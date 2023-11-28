@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
+            $table->string('number')->unique();
             $table->string('fullname');
             $table->string('email');
             $table->string('phone');
@@ -25,7 +26,7 @@ return new class extends Migration
             $table->boolean('lead_type')->comment('1=in,0=out');
             $table->unsignedBigInteger('channel_id');
             $table->unsignedBigInteger('media_id');
-            $table->unsignedBigInteger('source_id');
+            $table->unsignedBigInteger('source_id')->nullable();
             $table->text('general_notes');
 
             $table->foreign('office_id')->references('id')->on('branch_offices')->onDelete('cascade');
